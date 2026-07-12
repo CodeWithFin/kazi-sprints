@@ -110,7 +110,16 @@ export default async function clientRoutes(app) {
        LIMIT 100`,
       [request.params.id]
     );
-    return result.rows;
+
+    const tasks = await query(
+      `SELECT title, status FROM tasks WHERE milestone_id = $1 ORDER BY task_ref ASC`,
+      [request.params.id]
+    );
+
+    return {
+      commits: result.rows,
+      tasks: tasks.rows,
+    };
   });
 
   app.post('/client/milestones/:id/comments', async (request, reply) => {

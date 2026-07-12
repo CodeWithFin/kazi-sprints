@@ -64,7 +64,16 @@ export default async function adminRoutes(app) {
     if (!result.rows[0]) {
       return reply.code(404).send({ error: 'Client not found' });
     }
-    return result.rows[0];
+
+    const projects = await query(
+      `SELECT * FROM projects WHERE client_id = $1 ORDER BY created_at DESC`,
+      [request.params.id]
+    );
+
+    return {
+      ...result.rows[0],
+      projects: projects.rows,
+    };
   });
 
   app.post('/admin/clients/:id/users', async (request, reply) => {
@@ -159,9 +168,19 @@ export default async function adminRoutes(app) {
       [request.params.id]
     );
 
+    const milestonesWithTasks = await Promise.all(
+      milestones.rows.map(async (milestone) => {
+        const tasks = await query(
+          `SELECT * FROM tasks WHERE milestone_id = $1 ORDER BY task_ref ASC`,
+          [milestone.id]
+        );
+        return { ...milestone, tasks: tasks.rows };
+      })
+    );
+
     return {
       ...result.rows[0],
-      milestones: milestones.rows,
+      milestones: milestonesWithTasks,
       repos: repos.rows,
     };
   });
