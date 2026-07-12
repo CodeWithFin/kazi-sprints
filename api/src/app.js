@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/auth/index.js';
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ await app.register(cors, {
 });
 
 app.get('/health', async () => ({ ok: true }));
+
+await app.register(authRoutes);
 
 const port = Number(process.env.PORT_API || 4000);
 const host = process.env.HOST || '0.0.0.0';
