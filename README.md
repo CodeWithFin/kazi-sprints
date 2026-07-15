@@ -56,8 +56,8 @@ npm run seed
 
 Default seed admin (override with `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`):
 
-- Email: `admin@example.com`
-- Password: `changeme`
+- Email: `finley.mwachia12@gmail.com`
+- Password: `Misti@215`
 
 ## 4. Build and start with PM2
 
