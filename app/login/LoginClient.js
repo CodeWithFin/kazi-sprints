@@ -123,7 +123,7 @@ export default function LoginClient() {
 
           <label className="canvas-label">
             Password
-            <div className="relative">
+            <div style={{ position: 'relative' }}>
               <input
                 className="canvas-input" style={{ paddingRight: '2.8rem' }}
                 type={showPassword ? 'text' : 'password'}
