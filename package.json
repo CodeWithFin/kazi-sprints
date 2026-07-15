@@ -1,0 +1,27 @@
+{
+  "name": "sprints",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p ${PORT_WEB:-3000}",
+    "build": "next build",
+    "start": "next start -p ${PORT_WEB:-3000}",
+    "worker": "node lib/jobs/worker.js",
+    "migrate": "node lib/db/migrate.js",
+    "seed": "node lib/db/seed.js"
+  },
+  "dependencies": {
+    "next": "14.2.21",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@neondatabase/serverless": "^0.10.4",
+    "bcryptjs": "^2.4.3",
+    "bullmq": "^5.34.5",
+    "dotenv": "^16.4.7",
+    "ioredis": "^5.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1",
+    "uuid": "^11.0.5"
+  }
+}
